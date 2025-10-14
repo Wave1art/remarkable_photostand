@@ -10,7 +10,6 @@ ExecStart=/home/root/bin/renews.arm \
     -url https://www.arcamax.com/thefunnies/garfield/ \
     -xpath '//img[@id="comic-zoom"]/@src' \
     -mode fill \
-    -test \
     -scale 0.9
 Restart=always
 
