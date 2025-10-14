@@ -23,25 +23,27 @@ Install [WSL](https://docs.microsoft.com/en-us/learn/modules/get-started-with-wi
 ## Supported News/Comics Sources
 
 - XKCD 
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin xkcd`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | sh /dev/stdin xkcd`
 - Washington Post (only updates weekdays) 
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin wp`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | sh /dev/stdin wp`
 - New York Times (slightly low resolution) 
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin nyt`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | sh /dev/stdin nyt`
 - New York Times (high quality provided by [acrogenesis/nyt-today](https://github.com/acrogenesis/nyt-today)) 
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin nyt-hq`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | sh /dev/stdin nyt-hq`
 - Picsum (random images) 
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin picsum`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | sh /dev/stdin picsum`
 - LoremFlickr (random images) 
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | KEYWORDS=nature,cats sh /dev/stdin loremflicker`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | KEYWORDS=nature,cats sh /dev/stdin loremflicker`
     - replace 'nature,cats' with your own keywords
 - Unsplash (random images)
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | KEYWORDS=nature sh /dev/stdin unsplash`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | KEYWORDS=nature sh /dev/stdin unsplash`
     - replace 'nature' with your own keywords.  Only one keyword supported
 - Calvin and Hobbes 
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin cah`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | sh /dev/stdin cah`
+- Garfiled 
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | sh /dev/stdin garfield`
 - The Guardian 
-    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin uk_tg`
+    - `wget -O - https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/install.sh | sh /dev/stdin uk_tg`
 <!-- - Wikipedia Picture of the Day - `make install_wikipotd` -->
 
 

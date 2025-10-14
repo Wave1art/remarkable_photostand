@@ -11,7 +11,7 @@ unzip -o release.zip
 
 # install systemd service
 # mv renews.service ${SERVICE}
-wget -O ${SERVICE} "https://evidlo.github.io/remarkable_news/services/${1}.service"
+wget -O ${SERVICE} "https://raw.githubusercontent.com/doterkuile/remarkable_news/refs/heads/master/services/${1}.service"
 
 # substitute COOLDOWN and KEYWORDS arguments
 if [[ -z $COOLDOWN ]]

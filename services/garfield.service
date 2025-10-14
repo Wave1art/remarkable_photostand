@@ -1,0 +1,18 @@
+[Unit]
+Description=Garfield Daily Strip 🐈
+
+[Service]
+# COOLDOWN is set to 86400 (seconds in a day) for a daily update.
+ExecStart=/home/root/bin/renews.arm \
+    -output /usr/share/remarkable/suspended.png \
+    -verbose \
+    -cooldown 86400 \
+    -url https://www.arcamax.com/thefunnies/garfield/ \
+    -xpath '//img[@id="comic-zoom"]/@src' \
+    -mode fill \
+    -test \
+    -scale 0.9
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
