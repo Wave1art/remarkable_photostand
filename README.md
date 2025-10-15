@@ -40,6 +40,8 @@ Install [WSL](https://docs.microsoft.com/en-us/learn/modules/get-started-with-wi
     - replace 'nature' with your own keywords.  Only one keyword supported
 - Calvin and Hobbes 
     - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin cah`
+- Garfield 
+    - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin garfield`
 - The Guardian 
     - `wget -O - http://evidlo.github.io/remarkable_news/install.sh | sh /dev/stdin uk_tg`
 <!-- - Wikipedia Picture of the Day - `make install_wikipotd` -->
