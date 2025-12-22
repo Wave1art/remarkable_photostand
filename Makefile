@@ -2,50 +2,34 @@
 .SHELLFLAGS = -ec
 .SILENT:
 
-host=10.11.99.1
-cooldown=3600
+# We use a recursive variable (=) so it evaluates when called
+VERSION = $(shell git describe --tags --always 2>/dev/null || git rev-parse --short HEAD)
 
-version := $(shell git describe --tags --always 2>/dev/null || git rev-parse --short HEAD)
+# ... (keep your build targets renews.arm, etc. here) ...
 
-renews.arm:
-	# build inside the module directory so go can find the local go.mod
-	cd remarkable_service && env GOOS=linux GOARCH=arm GOARM=7 go build -o ../renews.arm .
-
-renews.arm64:
-	# build inside the module directory so go can find the local go.mod
-	cd remarkable_service && env GOOS=linux GOARCH=arm64 go build -tags "rmpp" -o ../renews.arm64 .
-
-renews.x86:
-	# build inside the module directory so go can find the local go.mod
-	cd remarkable_service && go build -o ../renews.x86 .
-
-# get latest prebuilt releases
-.PHONY: download_prebuilt
-download_prebuilt:
-	curl -LO http://github.com/wave1art/remarkable_photog/releases/latest/download/release.zip
-	unzip release.zip
-
-# build release
 .PHONY: release
-# Ensure a tag exists and is pushed before creating the GitHub release (avoids --verify-tag failures)
-release: renews.arm renews.x86 renews.arm64 tag
-	zip release.zip renews.arm renews.x86 renews.arm64
-	gh release create --latest --verify-tag $(version) release.zip
-
-# tag and push tag
-.PHONY: tag
-tag:
-	# Create tag only if it doesn't already exist locally, and push only if missing on remote
-	if git rev-parse -q --verify "refs/tags/$(version)" >/dev/null; then \
-		echo "tag '$(version)' already exists locally"; \
-	else \
-		git tag $(version); \
+release: renews.arm renews.x86 renews.arm64
+	# 1. Check for uncommitted changes
+	if [ -n "$$(git status --porcelain)" ]; then \
+		echo "ERROR: Working directory is dirty. Commit your changes before releasing."; \
+		exit 1; \
 	fi; \
-	if git ls-remote --tags origin | grep -q "refs/tags/$(version)"; then \
-		echo "tag '$(version)' already exists on origin"; \
-	else \
-		git push origin $(version); \
-	fi
-
-clean:
-	rm -f renews.x86 renews.arm renews.arm64 release.zip
+	\
+	# 2. Capture the version string
+	V=$(VERSION); \
+	echo "Target version: $$V"; \
+	\
+	# 3. Ensure the tag exists locally
+	if ! git rev-parse -q --verify "refs/tags/$$V" >/dev/null; then \
+		echo "Creating local tag: $$V"; \
+		git tag "$$V"; \
+	fi; \
+	\
+	# 4. Push the tag to origin
+	echo "Syncing tag $$V to origin..."; \
+	git push origin "refs/tags/$$V:refs/tags/$$V"; \
+	\
+	# 5. Package and Release
+	zip release.zip renews.arm renews.x86 renews.arm64; \
+	echo "Creating GitHub release for $$V..."; \
+	gh release create "$$V" release.zip --latest --verify-tag
