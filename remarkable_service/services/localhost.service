@@ -6,7 +6,7 @@ ExecStart=/home/root/bin/renews.arm \
     -output /usr/share/remarkable/suspended.png \
     -verbose \
     -cooldown COOLDOWN \
-    -url http://192.168.0.7:8080/jenny/image.png \
+    -url http://192.168.0.7:8000/image \
     -mode center
 Restart=always
 
