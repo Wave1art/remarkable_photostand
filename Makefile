@@ -2,8 +2,8 @@
 .SHELLFLAGS = -ec
 .SILENT:
 
-# We use a recursive variable (=) so it evaluates when called
-VERSION = $(shell git describe --tags --always 2>/dev/null || git rev-parse --short HEAD)
+# Use := to ensure this is calculated once at the start
+VERSION := $(shell git describe --tags --always 2>/dev/null || git rev-parse --short HEAD)
 
 renews.arm:
 	cd remarkable_service && env GOOS=linux GOARCH=arm GOARM=7 go build -o ../renews.arm .
