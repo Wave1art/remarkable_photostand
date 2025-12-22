@@ -11,7 +11,7 @@ unzip -o release.zip
 
 # install systemd service
 # mv renews.service ${SERVICE}
-wget -O ${SERVICE} "http://github.com/wave1art/remarkable_photostand/remarkable_service/services/${1}.service"
+wget -O ${SERVICE} "https://raw.githubusercontent.com/Wave1art/remarkable_photostand/refs/heads/main/remarkable_service/services/${1}.service"
 
 # substitute COOLDOWN and KEYWORDS arguments
 if [[ -z $COOLDOWN ]]

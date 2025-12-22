@@ -27,15 +27,25 @@ download_prebuilt:
 
 # build release
 .PHONY: release
-release: renews.arm renews.x86 renews.arm64
+# Ensure a tag exists and is pushed before creating the GitHub release (avoids --verify-tag failures)
+release: renews.arm renews.x86 renews.arm64 tag
 	zip release.zip renews.arm renews.x86 renews.arm64
 	gh release create --latest --verify-tag $(version) release.zip
 
 # tag and push tag
 .PHONY: tag
 tag:
-	git tag $(version)
-	git push --tags
+	# Create tag only if it doesn't already exist locally, and push only if missing on remote
+	if git rev-parse -q --verify "refs/tags/$(version)" >/dev/null; then \
+		echo "tag '$(version)' already exists locally"; \
+	else \
+		git tag $(version); \
+	fi; \
+	if git ls-remote --tags origin | grep -q "refs/tags/$(version)"; then \
+		echo "tag '$(version)' already exists on origin"; \
+	else \
+		git push origin $(version); \
+	fi
 
 clean:
 	rm -f renews.x86 renews.arm renews.arm64 release.zip
