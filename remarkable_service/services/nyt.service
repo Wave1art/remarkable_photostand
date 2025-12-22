@@ -1,0 +1,15 @@
+[Unit]
+Description=The New York Times
+
+[Service]
+ExecStart=/home/root/bin/renews.arm \
+    -output /usr/share/remarkable/suspended.png \
+    -verbose \
+    -cooldown COOLDOWN \
+    -url https://www.frontpages.com/the-new-york-times \
+    -xpath '//img[@id="giornale-img"]/@src' \
+    -mode fill
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

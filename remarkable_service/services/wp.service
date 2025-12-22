@@ -1,0 +1,15 @@
+[Unit]
+Description=Washington Post
+
+[Service]
+ExecStart=/home/root/bin/renews.arm \
+    -output /usr/share/remarkable/suspended.png \
+    -verbose \
+    -cooldown COOLDOWN \
+    -url https://i.prcdn.co/img?file=1047%%Y%%m%%d00000000001001&page=1&scale=246 \
+    -strftime \
+    -mode fill
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
