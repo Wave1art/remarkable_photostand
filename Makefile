@@ -17,26 +17,28 @@ renews.x86:
 .PHONY: release
 release: renews.arm renews.x86 renews.arm64
 	# 1. Check for uncommitted changes
-	if [ -n "$$(git status --porcelain)" ]; then
-		echo "ERROR: Working directory is dirty. Commit your changes before releasing."
-		exit 1
+	if [ -n "$$(git status --porcelain)" ]; then \
+		echo "ERROR: Working directory is dirty. Commit your changes before releasing."; \
+		exit 1; \
 	fi
-
-	# 2. Use the Make variable directly to avoid empty shell variables
-	# We'll use $(VERSION) instead of trying to map it to $$V
+	
+	# 2. Log Version
 	echo "Target version: $(VERSION)"
-
+	
 	# 3. Ensure the tag exists locally
-	if ! git rev-parse -q --verify "refs/tags/$(VERSION)" >/dev/null; then
-		echo "Creating local tag: $(VERSION)"
-		git tag "$(VERSION)"
+	if ! git rev-parse -q --verify "refs/tags/$(VERSION)" >/dev/null; then \
+		echo "Creating local tag: $(VERSION)"; \
+		git tag "$(VERSION)"; \
 	fi
-
+	
 	# 4. Push the tag to origin
 	echo "Syncing tag $(VERSION) to origin..."
 	git push origin "refs/tags/$(VERSION):refs/tags/$(VERSION)"
-
+	
 	# 5. Package and Release
 	zip release.zip renews.arm renews.x86 renews.arm64
 	echo "Creating GitHub release for $(VERSION)..."
 	gh release create "$(VERSION)" release.zip --latest --verify-tag
+
+clean:
+	rm -f renews.x86 renews.arm renews.arm64 release.zip
