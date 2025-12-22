@@ -1,5 +1,5 @@
 [Unit]
-Description=New York Times
+Description=Local photo server
 
 [Service]
 ExecStart=/home/root/bin/renews.arm \
