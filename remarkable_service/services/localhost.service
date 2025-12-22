@@ -7,7 +7,7 @@ ExecStart=/home/root/bin/renews.arm \
     -verbose \
     -cooldown COOLDOWN \
     -url http://192.168.0.7:8000/image \
-    -mode center
+    -mode fill
 Restart=always
 
 [Install]
