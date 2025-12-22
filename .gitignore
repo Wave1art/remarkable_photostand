@@ -1,6 +1,7 @@
 renews.service
 renews.arm
 renews.x86
+renews.arm64
 release.zip
 *png
 

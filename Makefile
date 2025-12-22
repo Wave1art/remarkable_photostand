@@ -5,7 +5,14 @@
 # We use a recursive variable (=) so it evaluates when called
 VERSION = $(shell git describe --tags --always 2>/dev/null || git rev-parse --short HEAD)
 
-# ... (keep your build targets renews.arm, etc. here) ...
+renews.arm:
+	cd remarkable_service && env GOOS=linux GOARCH=arm GOARM=7 go build -o ../renews.arm .
+
+renews.arm64:
+	cd remarkable_service && env GOOS=linux GOARCH=arm64 go build -tags "rmpp" -o ../renews.arm64 .
+
+renews.x86:
+	cd remarkable_service && go build -o ../renews.x86 .
 
 .PHONY: release
 release: renews.arm renews.x86 renews.arm64
