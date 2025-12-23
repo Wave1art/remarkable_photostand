@@ -1,14 +1,8 @@
 [Unit]
 Description=Local photo server
+Wants=network-online.target
+After=network-online.target
 
 [Service]
-ExecStart=/home/root/bin/renews.arm \
-    -output /usr/share/remarkable/suspended.png \
-    -verbose \
-    -cooldown COOLDOWN \
-    -url http://192.168.0.7:8000/image \
-    -mode fill
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
+Type=oneshot
+ExecStart=/home/root/bin/renews.sh

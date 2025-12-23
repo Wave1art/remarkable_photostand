@@ -1,0 +1,13 @@
+[Unit]
+Description=Run the photostand app on a schedule, wake up from suspended state
+
+[Timer]
+OnCalendar=*:0/2
+Unit=url-renews.service
+
+WakeSystem=true
+Persistent=false
+AccuracySec=10s
+
+[Install]
+WantedBy=timers.target

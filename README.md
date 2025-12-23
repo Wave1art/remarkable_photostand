@@ -12,7 +12,7 @@ Login to the reMarkable with [SSH](https://remarkable.guide/guide/access/ssh.htm
 
     wget -O - https://raw.githubusercontent.com/Wave1art/remarkable_photostand/refs/heads/main/remarkable_service/install.sh | sh /dev/stdin localhost
 
-This will install and start the update service on the reMarkable.  Every time you connect to WiFi, it will try to grab the latest front page from The New York Times.  See below for more image sources.
+This will install and start the update service on the reMarkable.  Every time you connect to WiFi, it will try to grab the latest front page from local host.  See below for more image sources.
 
 By default, downloads are rate limited to once per hour (3600 s).  This can be overriden by modifying `/etc/systemd/system/renews.service`
 
@@ -58,3 +58,15 @@ Then disconnect and reconnect WiFi to trigger a download.  `remarkable_news` wil
 ## Contributing
 
 See [contributing.md](contributing.md)
+
+
+## Development notes
+
+useful commands:
+
+``` bash
+cd /etc/systemd/system
+systemctl daemon-reload
+systemctl restart url-poll.timer
+journalctl -u url-poll.service
+```
