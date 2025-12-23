@@ -36,7 +36,7 @@ release: renews.arm renews.x86 renews.arm64
 	git push origin "refs/tags/$(VERSION):refs/tags/$(VERSION)"
 	
 	# 5. Package and Release
-	zip release.zip renews.arm renews.x86 renews.arm64 ./remarkable_service/renews.sh
+	zip -j release.zip renews.arm renews.x86 renews.arm64 ./remarkable_service/renews.sh
 	echo "Creating GitHub release for $(VERSION)..."
 	gh release create "$(VERSION)" release.zip --latest --verify-tag
 

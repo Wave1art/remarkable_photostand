@@ -4,6 +4,9 @@ TIMER=/etc/systemd/system/renews.timer
 
 # stop service if running
 systemctl stop renews.service || true
+systemctl disable renews.service || true
+systenctl stop renews.timer || true
+
 # install the renews binary from github releases
 mkdir -p /home/root/bin
 cd /home/root/bin
@@ -28,5 +31,5 @@ sed -i "s|KEYWORDS|${KEYWORDS}|" ${SERVICE}
 
 # reload systemd and remove extra files
 systemctl daemon-reload
-systemctl enable --now renews.service
+systemctl enable --now renews.timer
 rm renews.x86 release.zip
