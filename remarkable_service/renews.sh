@@ -11,8 +11,13 @@ count=0
 while [ $count -lt $MAX_RETRIES ]; do
     # Try to ping Google DNS or your target domain once
     if ping -c 1 -W 2 8.8.8.8 > /dev/null 2>&1; then
-        echo "Network is UP. Polling URL..."
-        /usr/bin/wget -q -T 10 -O /dev/null "$TARGET_URL"
+        echo "Network is UP. Getting latest image"
+        # /usr/bin/wget -q -T 10 -O /dev/null "$TARGET_URL"
+        /home/root/bin/renews.arm \
+            -output /usr/share/remarkable/suspended.png \
+            -url http://192.168.0.7:8000/image \
+            -mode fill \
+            -test
         exit 0
     else
         echo "Network down, retrying in $RETRY_DELAY seconds... ($((count+1))/$MAX_RETRIES)"
