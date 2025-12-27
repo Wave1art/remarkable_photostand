@@ -26,7 +26,9 @@ while [ $count -lt $MAX_RETRIES ]; do
 
         # Set the next wakeup time to be in 2 minutes   
         echo 0 > /sys/class/rtc/rtc0/wakealarm
-        echo $(( $(date '+%s') + 120)) > /sys/class/rtc/rtc0/wakealarm
+        echo $(( $(date '+%s') + 300)) > /sys/class/rtc/rtc0/wakealarm
+        
+        systemctl restart xochitl
 
         exit 0
     else
