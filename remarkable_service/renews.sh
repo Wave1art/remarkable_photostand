@@ -1,9 +1,9 @@
 #!/usr/bin/sh
 
 BASE_URL="http://192.168.0.7:8000"
-HEALTH_URL="/health"
-# TARGET_URL="/image"
-TARGET_URL="/"
+HEALTH_URL="health"
+# TARGET_URL="image"
+TARGET_URL=""
 MAX_RETRIES=10
 RETRY_DELAY=5
 
