@@ -3,9 +3,10 @@ SERVICE=/etc/systemd/system/renews.service
 TIMER=/etc/systemd/system/renews.timer
 
 # stop service if running
+systenctl stop renews.timer || true
 systemctl stop renews.service || true
 systemctl disable renews.service || true
-systenctl stop renews.timer || true
+
 
 # install the renews binary from github releases
 mkdir -p /home/root/bin
