@@ -1,0 +1,14 @@
+[Unit]
+Description=Run the URL poller every 5 minutes
+
+[Timer]
+OnCalendar=00/6:00
+
+MaxConsecutiveFailures=0
+Unit=url-poll.service
+WakeSystem=true
+Persistent=true
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target

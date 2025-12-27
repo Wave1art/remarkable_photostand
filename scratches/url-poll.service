@@ -1,0 +1,8 @@
+[Unit]
+Description=Poll a URL using wget
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/root/bin/poll-url.sh
