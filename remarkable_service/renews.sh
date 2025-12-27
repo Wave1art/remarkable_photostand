@@ -16,13 +16,13 @@ while [ $count -lt $MAX_RETRIES ]; do
     # if ping -c 1 -W 2 8.8.8.8 > /dev/null 2>&1; then
     if /usr/bin/wget -q -T 5 --spider "$BASE_URL/$HEALTH_URL"; then
         echo "Network is UP. Getting latest image"
-        /usr/bin/wget -q -T 10 -O /dev/null "$BASE_URL/"
+        # /usr/bin/wget -q -T 10 -O /dev/null "$BASE_URL/"
 
-        # /home/root/bin/renews.arm \
-        #     -output /usr/share/remarkable/suspended.png \
-        #     -url "$BASE_URL/$TARGET_URL" \
-        #     -mode fill \
-        #     -test
+        /home/root/bin/renews.arm \
+            -output /usr/share/remarkable/suspended.png \
+            -url "$BASE_URL/$TARGET_URL" \
+            -mode fill \
+            -test
 
         # Set the next wakeup time to be in 2 minutes   
         echo 0 > /sys/class/rtc/rtc0/wakealarm
